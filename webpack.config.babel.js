@@ -5,6 +5,9 @@ export default () => ({
 	entry: './src/index.jsx',
 	resolve: {
 		extensions: ['.js', '.jsx'],
+		alias: {
+			Helpers: path.resolve(__dirname, 'src/js/helpers/')
+		}
 	},
 	module: {
 		rules: [
