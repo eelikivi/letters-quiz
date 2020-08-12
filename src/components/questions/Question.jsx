@@ -8,10 +8,6 @@ import LetterButton from './LetterButton';
 import ChoiceButton from './ChoiceButton';
 import Image from './Image';
 
-<<<<<<< HEAD
-export default function Question() {
-	const phrase = 'French Fries';
-=======
 
 /**
  * Question component
@@ -21,7 +17,6 @@ export default function Question(props) {
 	const { phrase, img } = data;
 	const { nextQuestion } = functions;
 
->>>>>>> 390de23daa867c6e6ab602535a5b1d4a9356d8dd
 	const letters = phrase.toUpperCase().replace(/ /g, '').split('');
 	const characters = phrase.split('');
 
@@ -39,7 +34,7 @@ export default function Question(props) {
 		)
 	);
 
-	//
+	// Check if all letters are chosen. If order is correct, player wins
 	useEffect(() => {
 		if (choices.length === letters.length) {
 			const chosenLetters = choices.filter(choice => !!choice.letter)
@@ -54,8 +49,8 @@ export default function Question(props) {
 
 	/**
 	 * Choose letter (letter button click)
-	 * @param {*} letter letter
-	 * @param {*} id id given to letter object when initialising state
+	 * @param {string} letter letter
+	 * @param {int} id id given to letter object when initialising state
 	 */
 	const chooseLetter = (letter, id) => {
 		if (win) return false;
@@ -74,7 +69,7 @@ export default function Question(props) {
 
 	/**
 	 * Remove letter (choice button click)
-	 * @param {Int} id id given to letter object when initialising state
+	 * @param {int} id id given to letter object when initialising state
 	 */
 	function removeLetter(id) {
 		if (win) return false;
@@ -120,23 +115,30 @@ export default function Question(props) {
 		/>
 	));
 
+	/**
+	 * Image component
+	 */
 	const image = <Image
-			data={{
-				img
-			}}
+		data={{
+			img
+		}}
 	/>
 
-	const feedback = <button onClick={nextQuestion}>Next</button>;
+	/**
+	 * Feedback
+	 */
+	const feedback = <div>
+		<h2>Great!</h2>
+		<button onClick={nextQuestion}>Next</button>
+	</div>;
+
 
 	/**
 	 * Render
 	 */
 	return (
 		<div className='Question'>
-			<div className={`Question__Feedback ${win ? 'show' : ''}`}>
-				<h2>Great!</h2>
-				{win && feedback}
-			</div>
+			<div className={`Question__Feedback ${win ? 'show' : ''}`}>{feedback}</div>
 			<div className='Question__Image'>{image}</div>
 			<div className='Question__Letters'>{letterButtons}</div>
 			<div className='Question__Choices'>{choiceButtons}</div>

@@ -1,38 +1,56 @@
 import React, { useState } from 'react';
 
-// Utility
-import shuffle from 'Utility/shuffle';
-
 // Data
-import data from './questions.json';
-const shuffledData = shuffle(data);
+import data from './data.json';
 
 // Styles
 import styles from 'Scss/main.scss';
 
 // Child components
-import Question from './question/Question';
+import Intro from './intro/Intro';
+import List from './list/List';
+import Questions from './questions/Questions';
 
+// App states
+const INTRO = 0;
+const LIST = 1;
+const PLAY = 2;
+const RESULTS = 3;
+
+
+/**
+ *
+ */
 export default function App() {
-	const [index, setIndex] = useState(0);
+	const [appState, setAppState] = useState(PLAY);
 
-	function nextQuestion() {
-		setIndex(index + 1);
+	const quiz = data.find(item => item.categoryName === 'cats');
+
+	/**
+	 *
+	 */
+	function endQuiz() {
+		setAppState(INTRO);
 	}
 
-	const questions = shuffledData.map((item, i) =>
-		<Question
-			key={i}
-			data={item}
-			functions={{
-				nextQuestion
-			}}
-		/>
-	);
+	switch(appState) {
+		case PLAY:
+			return <Questions
+				data={{
+					questions: quiz.questions
+				}}
+				functions={{
+					endQuiz
+				}}
+			/>;
+			break;
 
-	return (
-		<div>
-			{questions[index]}
-		</div>
-	);
+		case LIST:
+			return <div></div>;
+			break;
+
+		default:
+			return <Intro />;
+			break;
+	}
 }
