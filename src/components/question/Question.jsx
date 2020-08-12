@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
-import shuffle from 'Helpers/shuffle';
+// Utility
+import shuffle from 'Utility/shuffle';
 
+// Child components
 import LetterButton from './LetterButton';
 import ChoiceButton from './ChoiceButton';
 import Image from './Image';
 
+
+/**
+ * Question component
+ */
 export default function Question(props) {
 	const { data, functions } = props;
 	const { phrase, img } = data;
@@ -122,7 +128,10 @@ export default function Question(props) {
 	 */
 	return (
 		<div className='Question'>
-			{win && <div className='Question__Feedback'>{feedback}</div>}
+			<div className={`Question__Feedback ${win ? 'show' : ''}`}>
+				<h2>Great!</h2>
+				{win && feedback}
+			</div>
 			<div className='Question__Image'>{image}</div>
 			<div className='Question__Letters'>{letterButtons}</div>
 			<div className='Question__Choices'>{choiceButtons}</div>

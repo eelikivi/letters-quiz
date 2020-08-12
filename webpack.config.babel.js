@@ -8,7 +8,7 @@ export default () => ({
 		extensions: ['.js', '.jsx', '.scss'],
 		alias: {
 			Scss: path.resolve(__dirname, 'src/scss/'),
-			Helpers: path.resolve(__dirname, 'src/js/helpers/'),
+			Utility: path.resolve(__dirname, 'src/js/utility/'),
 			Components: path.resolve(__dirname, 'src/components/')
 		}
 	},

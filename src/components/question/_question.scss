@@ -1,4 +1,6 @@
 .Question {
+	position: relative;
+
 	max-width: 600px;
 	margin: auto;
 
@@ -77,6 +79,45 @@
 				background-color: #fff;
 				border: 1px solid #dc9779;
 			}
+		}
+	}
+
+	&__Feedback {
+		visibility: hidden;
+		position: absolute;
+		z-index: 1;
+		top: 50%;
+		left: 50%;
+		min-width: 300px;
+		padding: 2rem;
+
+		transform: translate(-50%, -75%);
+
+		text-align: center;
+		background-color: #f6f7f1;
+		border-radius: 7px;
+
+		opacity: 0;
+		transition: all .5s;
+
+		&.show {
+			visibility: visible;
+			opacity: 1;
+			transform: translate(-50%, -50%);
+		}
+
+		h2 {
+			margin-top: 0;
+			margin-bottom: 2rem;
+		}
+
+		button {
+			width: auto;
+			background-color: #349fa4;
+			border-radius: 2rem;
+			color: #fff;
+			min-width: 100px;
+			font-weight: bold;
 		}
 	}
 }

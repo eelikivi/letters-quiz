@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 
+// Utility
+import shuffle from 'Utility/shuffle';
+
 // Data
 import data from './questions.json';
+const shuffledData = shuffle(data);
 
 // Styles
 import styles from 'Scss/main.scss';
@@ -16,16 +20,15 @@ export default function App() {
 		setIndex(index + 1);
 	}
 
-	const questions = data.map((item, index) =>
+	const questions = shuffledData.map((item, i) =>
 		<Question
-			key={index}
+			key={i}
 			data={item}
 			functions={{
 				nextQuestion
 			}}
 		/>
 	);
-
 
 	return (
 		<div>
