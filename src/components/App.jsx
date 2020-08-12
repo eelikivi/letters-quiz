@@ -17,14 +17,14 @@ const LIST = 1;
 const PLAY = 2;
 const RESULTS = 3;
 
-
 /**
- *
+ * App
  */
 export default function App() {
-	const [appState, setAppState] = useState(PLAY);
+	const [appState, setAppState] = useState(INTRO);
+	const [quiz, setQuiz] = useState(false);
 
-	const quiz = data.find(item => item.categoryName === 'cats');
+
 
 	/**
 	 *
@@ -33,6 +33,27 @@ export default function App() {
 		setAppState(INTRO);
 	}
 
+
+	/**
+	 *
+	 * @param {string} category
+	 */
+	function startQuiz(category) {
+		setQuiz(data.find(item => item.categoryName === category));
+		setAppState(PLAY);
+	}
+
+
+	/**
+	 * Called from children to change app state
+	 * @param {int} state
+	 */
+	function changeState(state) {
+		setAppState(state);
+	}
+
+
+	// Render
 	switch(appState) {
 		case PLAY:
 			return <Questions
@@ -46,11 +67,21 @@ export default function App() {
 			break;
 
 		case LIST:
-			return <div></div>;
+			return <List
+				data={data}
+				functions={{
+					startQuiz,
+					changeState
+				}}
+			/>;
 			break;
 
 		default:
-			return <Intro />;
+			return <Intro
+				functions={{
+					changeState
+				}}
+			/>;
 			break;
 	}
 }

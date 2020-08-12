@@ -11,5 +11,22 @@
 				"phrase": "Potato"
 			}
 		]
+	},
+	{
+		"categoryName": "more cats",
+		"questions": [
+			{
+				"img": "https://placekitten.com/840/480/",
+				"phrase": "Apple"
+			},
+			{
+				"img": "https://placekitten.com/540/480/",
+				"phrase": "Microsoft"
+			},
+			{
+				"img": "https://placekitten.com/940/480/",
+				"phrase": "YouTube"
+			}
+		]
 	}
 ]
