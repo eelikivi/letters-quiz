@@ -4,65 +4,99 @@ import shuffle from 'Helpers/shuffle';
 
 import LetterButton from './LetterButton';
 import ChoiceButton from './ChoiceButton';
+import Image from './Image';
 
-export default function Question() {
+export default function Question(props) {
+	const { data, functions } = props;
+	const { phrase, img } = data;
+	const { nextQuestion } = functions;
 
-	const phrase = 'French Fries';
 	const letters = phrase.toUpperCase().replace(/ /g, '').split('');
 	const characters = phrase.split('');
 
 	// State
-	const [last, setLast] = useState();
+	const [win, setWin] = useState(false);
 	const [choices, setChoices] = useState(new Array(letters.length).fill({ id: false, letter: false }));
 	const [letterData, setLetterData] = useState(
 		shuffle(
 			letters.map((letter, index) => ({
 				data: {
 					id: index,
-					letter,
-					active: false,
+					letter
 				}
 			}))
 		)
 	);
 
-	const toggleLetterDataItem = id => {
-		const newLetterData = [...letterData];
-		const letterDataIndex = newLetterData.findIndex(item => item.data.id === id);
-		const item = newLetterData[letterDataIndex];
-		item.data = { ...item.data, ...{active: !item.data.active}};
+	//
+	useEffect(() => {
+		if (choices.length === letters.length) {
+			const chosenLetters = choices.filter(choice => !!choice.letter)
+				.map(item => item.letter);
 
-		setLetterData(newLetterData);
-	}
+			if (chosenLetters.join('') === letters.join('')) {
+				setWin(true);
+			}
+		}
+	}, [choices]);
 
-	// Choose letter function
+
+	/**
+	 * Choose letter (letter button click)
+	 * @param {*} letter letter
+	 * @param {*} id id given to letter object when initialising state
+	 */
 	const chooseLetter = (letter, id) => {
-		const newChoices = [...choices];
-		const firstEmpty = newChoices.findIndex(item => item.letter === false);
-		newChoices[firstEmpty] = { letter, id };
-		setChoices(newChoices);
+		if (win) return false;
 
-		toggleLetterDataItem(id);
+		const newChoices = [...choices];
+
+		// Find first empty item (where letter is false)
+		const firstEmpty = newChoices.findIndex(item => item.letter === false);
+
+		// Set item values to selected
+		newChoices[firstEmpty] = { letter, id };
+
+		setChoices(newChoices);
 	};
 
-	// Remove letter function
+
+	/**
+	 * Remove letter (choice button click)
+	 * @param {Int} id id given to letter object when initialising state
+	 */
 	function removeLetter(id) {
+		if (win) return false;
+
 		const newChoices = [...choices];
+
+		// Find array item with id
 		const match = newChoices.findIndex(item => item.id === id);
+		// Set values to false
 		newChoices[match] = { letter: false, id: false };
 		setChoices(newChoices);
-
-		toggleLetterDataItem(id);
 	}
 
+
+	/**
+	 * Letter buttons
+	 * - add items to choices array
+	 */
 	const letterButtons = letterData.map((item) => (
 		<LetterButton
 			key={item.data.id}
-			data={item.data}
+			data={{
+				...item.data,
+				active: choices.some(choice => choice.id === item.data.id) // Item id is in choices array
+			}}
 			functions={{ chooseLetter }}
 		/>
 	));
 
+	/**
+	 * Choice buttons
+	 * - remove items from choices array
+	 */
 	const choiceButtons = letters.map((character, index) => (
 		<ChoiceButton
 			key={index}
@@ -75,13 +109,23 @@ export default function Question() {
 		/>
 	));
 
-	return (
-		<div>
-			<div>count: {}</div>
-			<div>choices: {Object.entries(choices).map(([key, val]) => val.letter) }</div>
+	const image = <Image
+			data={{
+				img
+			}}
+	/>
 
-			<div>{letterButtons}</div>
-			<div>{choiceButtons}</div>
+	const feedback = <button onClick={nextQuestion}>Next</button>;
+
+	/**
+	 * Render
+	 */
+	return (
+		<div className='Question'>
+			{win && <div className='Question__Feedback'>{feedback}</div>}
+			<div className='Question__Image'>{image}</div>
+			<div className='Question__Letters'>{letterButtons}</div>
+			<div className='Question__Choices'>{choiceButtons}</div>
 		</div>
 	);
 }

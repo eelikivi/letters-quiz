@@ -3,10 +3,13 @@ import HtmlWebPackPlugin from 'html-webpack-plugin';
 
 export default () => ({
 	entry: './src/index.jsx',
+	devtool: 'source-map',
 	resolve: {
-		extensions: ['.js', '.jsx'],
+		extensions: ['.js', '.jsx', '.scss'],
 		alias: {
-			Helpers: path.resolve(__dirname, 'src/js/helpers/')
+			Scss: path.resolve(__dirname, 'src/scss/'),
+			Helpers: path.resolve(__dirname, 'src/js/helpers/'),
+			Components: path.resolve(__dirname, 'src/components/')
 		}
 	},
 	module: {
@@ -26,6 +29,30 @@ export default () => ({
 				use: {
 					loader: 'html-loader',
 				},
+			},
+			{
+				test: /.scss/,
+				enforce: "pre",
+				loader: "import-glob-loader"
+			},
+			{
+				test: /\.s[ac]ss$/i,
+				exclude: /node_modules/,
+				use: [
+					'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							sourceMap: true,
+						},
+					},
+					{
+						loader: 'sass-loader',
+						options: {
+							sourceMap: true,
+						},
+					},
+				],
 			},
 		],
 	},
