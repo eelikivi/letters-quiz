@@ -6,7 +6,9 @@ export default function ChoiceButton(props) {
 	const { removeLetter } = functions;
 
 	function handleClick() {
-		removeLetter(id);
+		if (active) {
+			removeLetter(id);
+		}
 	}
 
 	return (

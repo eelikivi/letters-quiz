@@ -6,7 +6,9 @@ export default function LetterButton(props) {
 	const { chooseLetter } = functions;
 
 	function handleClick() {
-		chooseLetter(letter, id);
+		if (!active) {
+			chooseLetter(letter, id);
+		}
 	}
 
 	return (

@@ -6,7 +6,6 @@ import LetterButton from './LetterButton';
 import ChoiceButton from './ChoiceButton';
 
 export default function Question() {
-
 	const phrase = 'French Fries';
 	const letters = phrase.toUpperCase().replace(/ /g, '').split('');
 	const characters = phrase.split('');
@@ -26,6 +25,7 @@ export default function Question() {
 		)
 	);
 
+	// Toggle letterdata item data.active property
 	const toggleLetterDataItem = id => {
 		const newLetterData = [...letterData];
 		const letterDataIndex = newLetterData.findIndex(item => item.data.id === id);
