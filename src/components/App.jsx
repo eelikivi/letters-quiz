@@ -21,7 +21,7 @@ const RESULTS = 3;
  * App
  */
 export default function App() {
-	const [appState, setAppState] = useState(INTRO);
+	const [appState, setAppState] = useState(LIST);
 	const [quiz, setQuiz] = useState(false);
 
 
@@ -38,8 +38,11 @@ export default function App() {
 	 *
 	 * @param {string} category
 	 */
-	function startQuiz(category) {
-		setQuiz(data.find(item => item.categoryName === category));
+	function startQuiz(themeName, categoryName) {
+		const newQuiz = data.find(theme => theme.themeName === themeName)
+			.categories.find(category => category.categoryName === categoryName);
+
+		setQuiz(newQuiz);
 		setAppState(PLAY);
 	}
 

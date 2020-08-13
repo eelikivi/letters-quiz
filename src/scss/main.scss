@@ -1,6 +1,8 @@
 // Settings
 @import "./settings/theme";
 
+// Mixins
+@import "./mixins/button";
 
 // Components
 @import "../components/**/*.scss";

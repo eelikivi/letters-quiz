@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import ListItem from './ListItem';
 
@@ -8,35 +8,80 @@ export default function List(props) {
 	const { data, functions } = props;
 	const { startQuiz, changeState } = functions;
 
-	function chooseCategory(categoryName) {
-		startQuiz(categoryName);
+	const [theme, setTheme] = useState(false);
+
+
+	/**
+	 *
+	 * @param {string} categoryName
+	 */
+	function selectCategory(categoryName) {
+		startQuiz(theme, categoryName);
 	}
 
-	const listItems = data.map((item, index) =>
-		<ListItem
-			key={index}
-			data={{
-				...item,
-				id: index
-			}}
-			functions={{
-				chooseCategory
-			}}
-		/>
-	);
 
-	console.log(data);
+	/**
+	 *
+	 * @param {string} themeName
+	 */
+	function selectTheme(themeName) {
+		setTheme(themeName);
+	}
+
+
+	/**
+	 *
+	 */
+	function handleBackBtnClick() {
+		if (!theme) {
+			changeState(INTRO)
+		} else {
+			setTheme(false);
+		}
+	}
+
+
+	let listItems = [];
+
+	if (!theme) {
+		listItems = data.map((item, index) =>
+			<ListItem
+				key={`theme-${index}`}
+				data={{
+					name: item.themeName,
+				}}
+				functions={{
+					select: selectTheme
+				}}
+				/>
+				);
+			} else {
+				const categoryData = data.find(item => item.themeName === theme).categories;
+
+				listItems = categoryData.map((item, index) =>
+				<ListItem
+				key={`category-${index}`}
+				data={{
+					name: item.categoryName,
+					questions: item.questions
+				}}
+				functions={{
+					select: selectCategory
+				}}
+			/>
+		);
+	}
 
 	return (
 		<div className='List'>
-			<header>
+			<header className='List__Header'>
 				<div>
-					<button onClick={() => changeState(INTRO)}>Back</button>
+					<button onClick={handleBackBtnClick}>Back</button>
 				</div>
 				<h1>Top bar</h1>
 				<div></div>
 			</header>
-			<main>
+			<main className='List__Items'>
 				{listItems}
 			</main>
 		</div>
