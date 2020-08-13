@@ -40,5 +40,10 @@ export default function Questions(props) {
 		/>
 	);
 
-	return questionComponents[index];
+	return (
+		<>
+			<button onClick={() => endQuiz()}>quit</button>
+			{questionComponents[index]}
+		</>
+	);
 }
