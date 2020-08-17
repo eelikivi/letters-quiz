@@ -12,8 +12,7 @@ import Image from './Image';
 /**
  * Question component
  */
-export default function Question(props) {
-	const { data, functions } = props;
+export default function Question({ data, functions }) {
 	const { phrase, img } = data;
 	const { nextQuestion } = functions;
 

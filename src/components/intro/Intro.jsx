@@ -3,8 +3,7 @@ import React from 'react';
 const LIST = 1;
 const PLAY = 2;
 
-export default function Intro(props) {
-	const { functions } = props;
+export default function Intro({ functions }) {
 	const { changeState } = functions;
 
 	function handleClick() {

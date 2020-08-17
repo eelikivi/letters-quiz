@@ -1,9 +1,7 @@
 import React from 'react';
 
-export default function Image(props) {
-	const { data } = props;
+export default function Image({ data }) {
 	const { img } = data;
-
 
 	return (
 		<figure>

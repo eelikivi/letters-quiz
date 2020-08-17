@@ -1,3 +1,9 @@
+/**
+ * Letters Quiz (make up a better name)
+ * @author Eeli Kivikaarre
+ * TODO
+ *
+ */
 import React, { useState } from 'react';
 
 // Data
@@ -10,6 +16,7 @@ import styles from 'Scss/main.scss';
 import Intro from './intro/Intro';
 import List from './list/List';
 import Questions from './questions/Questions';
+import Results from './results/Results';
 
 // App states
 const INTRO = 0;
@@ -24,18 +31,21 @@ export default function App() {
 	const [appState, setAppState] = useState(LIST);
 	const [quiz, setQuiz] = useState(false);
 
+	const [resultsData, setResultsData] = useState(null);
 
 
 	/**
-	 *
+	 * TODO: description
+	 * @param {object} results
 	 */
-	function endQuiz() {
-		setAppState(INTRO);
+	function endQuiz(results) {
+		setResultsData(results);
+		setAppState(RESULTS);
 	}
 
 
 	/**
-	 *
+	 * TODO: description
 	 * @param {string} category
 	 */
 	function startQuiz(themeName, categoryName) {
@@ -64,7 +74,8 @@ export default function App() {
 					questions: quiz.questions
 				}}
 				functions={{
-					endQuiz
+					endQuiz,
+					changeState
 				}}
 			/>;
 			break;
@@ -74,6 +85,15 @@ export default function App() {
 				data={data}
 				functions={{
 					startQuiz,
+					changeState
+				}}
+			/>;
+			break;
+
+		case RESULTS:
+			return <Results
+				data={resultsData}
+				functions={{
 					changeState
 				}}
 			/>;

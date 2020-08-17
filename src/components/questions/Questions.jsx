@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Utility
 import shuffle from 'Utility/shuffle';
@@ -6,20 +6,39 @@ import shuffle from 'Utility/shuffle';
 // Child components
 import Question from './Question';
 
+// Constants
+const TIMELIMIT = 30;
+const LIST = 1;
+
 /**
  *
  */
-export default function Questions(props) {
-	const { data, functions } = props;
+export default function Questions({ data, functions }) {
 	const { questions } = data;
-	const { endQuiz } = functions;
+	const { endQuiz, changeState } = functions;
+
 
 	const [index, setIndex] = useState(0);
+	const [startTime, setStartTime] = useState(new Date());
+
+	// Counter
+	const [count, setCount] = useState(TIMELIMIT);
+	const counter = () => setCount(count - 1);
+
+	// Init interval on mount, destroy on unmount
+	useEffect(() => {
+		if (count <= 0) {
+			endQuiz({ win: false })
+			return;
+		}
+		const id = setInterval(counter, 1000);
+		return () => clearInterval(id);
+	}, [count]);
 
 	// Next question
 	function nextQuestion() {
 		if (index >= questions.length - 1) {
-			endQuiz();
+			endQuiz({ win: true, startTime });
 		} else {
 			setIndex(index + 1);
 		}
@@ -42,7 +61,8 @@ export default function Questions(props) {
 
 	return (
 		<>
-			<button onClick={() => endQuiz()}>quit</button>
+			<button onClick={() => changeState(LIST)}>quit</button>
+			<p>{count}</p>
 			{questionComponents[index]}
 		</>
 	);

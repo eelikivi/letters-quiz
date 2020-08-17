@@ -4,8 +4,7 @@ import ListItem from './ListItem';
 
 const INTRO = 0;
 
-export default function List(props) {
-	const { data, functions } = props;
+export default function List({ data, functions }) {
 	const { startQuiz, changeState } = functions;
 
 	const [theme, setTheme] = useState(false);

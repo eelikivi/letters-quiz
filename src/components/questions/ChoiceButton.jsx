@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default function ChoiceButton(props) {
-	const { data, functions } = props;
+export default function ChoiceButton({ data, functions }) {
 	const { id, letter, active } = data;
 	const { removeLetter } = functions;
 

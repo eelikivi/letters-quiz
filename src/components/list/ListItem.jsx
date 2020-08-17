@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default function ListItem(props) {
-	const { data, functions } = props;
+export default function ListItem({ data, functions }) {
 	const { name, questions = false} = data;
 	const { select } = functions;
 

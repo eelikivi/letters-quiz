@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default function LetterButton(props) {
-	const { data, functions } = props;
+export default function LetterButton({ data, functions }) {
 	const { letter, active, id } = data;
 	const { chooseLetter } = functions;
 
