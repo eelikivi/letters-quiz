@@ -1,12 +1,8 @@
 .Question {
+	@extend .Container;
+	@extend .Main;
+
 	position: relative;
-
-	max-width: $container-max-width;
-	margin: auto;
-
-	background-color: $light;
-	box-shadow: 0px 0px 5px rgba(0,0,0,0.075);
-	border-radius: 7px;
 
 	&__Image {
 		figure {

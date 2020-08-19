@@ -1,0 +1,31 @@
+.ListButton {
+	@include btn-unstyled;
+	padding: 1rem 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	background-color: $gray;
+
+	&:not(:last-child) {
+		border-bottom: 1px solid darken($gray, 15%);
+	}
+}
+
+.CircleButton {
+	@include btn-unstyled;
+	width: 100px;
+	height: 100px;
+
+	color: $white;
+	background: $primary;
+
+	border: none;
+	border-radius: 50%;
+
+	cursor: pointer;
+}
+
+.CloseButton {
+	@include btn-unstyled;
+}

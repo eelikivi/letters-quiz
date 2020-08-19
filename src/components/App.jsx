@@ -6,6 +6,9 @@
  */
 import React, { useState } from 'react';
 
+// Utility
+import initFontAwesome from '../icons/font-awesome';
+
 // Data
 import data from './data.json';
 
@@ -23,6 +26,9 @@ const INTRO = 0;
 const LIST = 1;
 const PLAY = 2;
 const RESULTS = 3;
+
+// Init Font Awesoms
+initFontAwesome();
 
 /**
  * App

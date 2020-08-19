@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Utility
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import shuffle from 'Utility/shuffle';
 
 // Child components
@@ -17,7 +18,6 @@ export default function Questions({ data, functions }) {
 	const { questions } = data;
 	const { endQuiz, changeState } = functions;
 
-
 	const [index, setIndex] = useState(0);
 	const [startTime, setStartTime] = useState(new Date());
 
@@ -28,7 +28,7 @@ export default function Questions({ data, functions }) {
 	// Init interval on mount, destroy on unmount
 	useEffect(() => {
 		if (count <= 0) {
-			endQuiz({ win: false })
+			endQuiz({ win: false });
 			return;
 		}
 		const id = setInterval(counter, 1000);
@@ -49,21 +49,32 @@ export default function Questions({ data, functions }) {
 		shuffle(questions.map((item, index) => ({ ...item, id: index })))
 	);
 
-	const questionComponents = questionData.map(item =>
+	const questionComponents = questionData.map((item) => (
 		<Question
 			key={item.id}
 			data={item}
 			functions={{
-				nextQuestion
+				nextQuestion,
 			}}
 		/>
-	);
+	));
 
 	return (
-		<>
-			<button onClick={() => changeState(LIST)}>quit</button>
-			<p>{count}</p>
+		<section className='Questions'>
+			<header className='Questions__Topbar'>
+				<div>
+					<div>
+						<button className='CloseButton' onClick={() => changeState(LIST)}>
+							<FontAwesomeIcon icon={'times'} />
+						</button>
+					</div>
+					<div>
+						<p>{count}</p>
+					</div>
+					<div></div>
+				</div>
+			</header>
 			{questionComponents[index]}
-		</>
+		</section>
 	);
 }

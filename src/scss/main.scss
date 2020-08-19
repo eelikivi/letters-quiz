@@ -1,8 +1,17 @@
 // Settings
+@import "./settings/reset";
 @import "./settings/theme";
 
 // Mixins
 @import "./mixins/button";
+
+// General styles
+@import "./general/buttons";
+
+// Common components
+@import "./common/buttons";
+@import "./common/layout";
+@import "./common/topbar";
 
 // Components
 @import "../components/**/*.scss";

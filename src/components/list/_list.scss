@@ -1,49 +1,17 @@
 .List {
-	position: relative;
-	max-width: $container-max-width;
-	margin: auto;
-
-	min-height: 800px;
-	background-color: $light;
-
-	&__Header {
-		display: flex;
-		align-items: center;
-		height: 60px;
-		background-color: $secondary;
-		color: $white;
-
-		div,
-		h1 {
-			flex: 1;
-		}
-
-		h1 {
-			text-align: center;
-			margin: 0;
-		}
+	&__Topbar {
+		@extend .Topbar;
 	}
 
-
-	&__Items {
+	&__Main{
+		@extend .Container;
+		@extend .Main;
 		display: flex;
 		flex-direction: column;
-
 	}
 
-
 	&__Button {
-		@include btn-unstyled;
-		padding: 1rem 2rem;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-
-		background-color: $gray;
-
-		&:not(:last-child) {
-			border-bottom: 1px solid darken($gray, 15%);
-		}
+		@extend .ListButton;
 	}
 
 	&__ButtonTitle {

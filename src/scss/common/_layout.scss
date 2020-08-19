@@ -1,0 +1,10 @@
+.Container {
+	max-width: $container-max-width;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.Main {
+	min-height: calc(100vh - #{$topbar-height});
+	background-color: $light;
+}

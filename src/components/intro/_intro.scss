@@ -1,31 +1,25 @@
 .Intro {
 	position: relative;
-	max-width: $container-max-width;
-	margin: auto;
 
-	height: 800px;
-	background-color: $light;
+	&__Topbar {
+		@extend .Topbar;
+	}
 
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	&__Main {
+		@extend .Container;
+		@extend .Main;
 
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 
 	h1 {
 		margin-bottom: 2rem;
 	}
 
-	button {
-		width: 100px;
-		height: 100px;
-
-		color: $white;
-		background: $primary;
-
-		border: none;
-		border-radius: 50%;
-
-		cursor: pointer;
+	&__Button {
+		@extend .CircleButton;
 	}
 }

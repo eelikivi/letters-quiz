@@ -11,9 +11,12 @@ export default function Intro({ functions }) {
 	}
 
 	return (
-		<div className='Intro'>
-			<h1>Header</h1>
-			<button onClick={handleClick}>Start</button>
-		</div>
+		<section className='Intro'>
+			<header className='Intro__Topbar'></header>
+			<main className='Intro__Main'>
+				<h1>Header</h1>
+				<button className='Intro__Button' onClick={handleClick}>Start</button>
+			</main>
+		</section>
 	);
 }
