@@ -12,9 +12,10 @@ export default function Results({ data, functions }) {
 
 	const [endTime, setEndtime] = useState(new Date());
 
+	let seconds = '';
 	if (!!startTime) {
 		const dateDif = endTime.getTime() - startTime.getTime();
-		const seconds = dateDif / 1000;
+		seconds = dateDif / 1000;
 	}
 
 	return (
