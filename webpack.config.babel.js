@@ -9,8 +9,8 @@ export default () => ({
 		alias: {
 			Scss: path.resolve(__dirname, 'src/scss/'),
 			Utility: path.resolve(__dirname, 'src/js/utility/'),
-			Components: path.resolve(__dirname, 'src/components/')
-		}
+			Components: path.resolve(__dirname, 'src/components/'),
+		},
 	},
 	module: {
 		rules: [
@@ -32,8 +32,8 @@ export default () => ({
 			},
 			{
 				test: /.scss/,
-				enforce: "pre",
-				loader: "import-glob-loader"
+				enforce: 'pre',
+				loader: 'import-glob-loader',
 			},
 			{
 				test: /\.s[ac]ss$/i,
@@ -54,6 +54,10 @@ export default () => ({
 					},
 				],
 			},
+			{
+				test: /\.(woff|woff2|eot|ttf|otf)$/,
+				use: ['file-loader'],
+			},
 		],
 	},
 	plugins: [
@@ -66,6 +70,5 @@ export default () => ({
 		path: path.resolve(__dirname, './dist'),
 		filename: 'bundle.js',
 	},
-	devServer: {
-	}
+	devServer: {},
 });

@@ -82,7 +82,7 @@
 		visibility: hidden;
 		position: absolute;
 		z-index: 1;
-		top: 50%;
+		top: calc(#{$topbar-height} + 4rem);
 		left: 50%;
 		min-width: 300px;
 		padding: 2rem;

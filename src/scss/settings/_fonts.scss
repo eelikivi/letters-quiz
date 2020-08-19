@@ -1,0 +1,26 @@
+$font-family: "OpenSans";
+$fonts: (
+	("name": "Bold", "weight": 700, "style": normal),
+	("name": "BoldItalic", "weight": 700, "style": italic),
+	("name": "ExtraBold", "weight": 900, "style": normal),
+	("name": "ExtraBoldItalic", "weight": 900, "style": italic),
+	("name": "Italic", "weight": 400, "style": italic),
+	("name": "LightItalic", "weight": 300, "style": italic),
+	("name": "Regular", "weight": 400, "style": normal),
+	("name": "SemiBold", "weight": 600, "style": normal),
+	("name": "SemiBoldItalic", "weight": 600, "style": italic)
+);
+$format: "ttf";
+
+@each $font in $fonts {
+	@font-face {
+		$name: map-get($font, name);
+		$weight: map-get($font, weight);
+		$style: map-get($font, style);
+
+		font-family: #{$font-family};
+		src: url("../assets/fonts/#{$font-family}-#{$name}.#{$format}");
+		font-weight: $weight;
+		font-style: $style;
+	}
+}

@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 
 // Utility
-import initFontAwesome from '../icons/font-awesome';
+import initFontAwesome from '../js/utility/font-awesome';
 
 // Data
 import data from './data.json';

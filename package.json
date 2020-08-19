@@ -32,6 +32,7 @@
 		"@babel/register": "^7.10.5",
 		"babel-loader": "^8.1.0",
 		"css-loader": "^4.2.1",
+		"file-loader": "^6.0.0",
 		"html-loader": "^1.1.0",
 		"html-webpack-plugin": "^4.3.0",
 		"import-glob-loader": "^1.1.0",
