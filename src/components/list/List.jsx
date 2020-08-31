@@ -85,7 +85,7 @@ export default function List({ data, functions }) {
 				<div>
 					<div>
 						<button className='CloseButton' onClick={handleBackBtnClick}>
-							<FontAwesomeIcon icon={'times'} />
+							<FontAwesomeIcon icon={'chevron-left'} />
 						</button>
 					</div>
 					<div>

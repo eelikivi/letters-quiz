@@ -1,5 +1,7 @@
 import path from 'path';
 import HtmlWebPackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import CleanWebpackPlugin from 'webpack-clean';
 
 export default () => ({
 	entry: './src/index.jsx',
@@ -58,6 +60,10 @@ export default () => ({
 				test: /\.(woff|woff2|eot|ttf|otf)$/,
 				use: ['file-loader'],
 			},
+			{
+				test: /\.(jpe?g|gif|png|svg)$/,
+				use: ['file-loader'],
+			}
 		],
 	},
 	plugins: [
@@ -65,6 +71,16 @@ export default () => ({
 			template: './src/index.html',
 			filename: './index.html',
 		}),
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: './src/assets/images/**/*',
+					to: './assets/images/',
+					flatten: true
+				}
+			]
+		}),
+		new CleanWebpackPlugin()
 	],
 	output: {
 		path: path.resolve(__dirname, './dist'),

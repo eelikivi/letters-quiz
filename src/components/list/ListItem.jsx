@@ -12,7 +12,7 @@ export default function ListItem({ data, functions }) {
 		<button className='List__Button' onClick={handleClick}>
 			<span className='List__ButtonTitle'>
 				<strong>{name}</strong>
-				{questions && <span>Questions: {questions.length}</span>}
+				{questions && <span>Correct: 0/{questions.length}</span>}
 			</span>
 			<span>
 				&#9733;

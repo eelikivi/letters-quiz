@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Utility
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import shuffle from 'Utility/shuffle';
 
 // Child components
@@ -33,15 +34,21 @@ export default function Question({ data, functions }) {
 		)
 	);
 
-	// Check if all letters are chosen. If order is correct, player wins
-	useEffect(() => {
-		if (choices.length === letters.length) {
-			const chosenLetters = choices.filter(choice => !!choice.letter)
+
+	/**
+	 * Compare choices and letters
+	 */
+	function checkAnswer() {
+		const chosenLetters = choices.filter(choice => !!choice.letter)
 				.map(item => item.letter);
 
-			if (chosenLetters.join('') === letters.join('')) {
-				setWin(true);
-			}
+		return chosenLetters.join('') === letters.join('');
+	}
+
+	// Check if all letters are chosen. If order is correct, player wins
+	useEffect(() => {
+		if (checkAnswer()) {
+			setWin(true);
 		}
 	}, [choices]);
 
@@ -132,6 +139,9 @@ export default function Question({ data, functions }) {
 	</div>;
 
 
+	// Show invalid icon
+	const answerIsWrong = (choices.filter(choice => choice.letter).length === letters.length) && !checkAnswer();
+
 	/**
 	 * Render
 	 */
@@ -140,7 +150,12 @@ export default function Question({ data, functions }) {
 			<div className={`Question__Feedback ${win ? 'show' : ''}`}>{feedback}</div>
 			<div className='Question__Image'>{image}</div>
 			<div className='Question__Letters'>{letterButtons}</div>
-			<div className='Question__Choices'>{choiceButtons}</div>
+			<div className='Question__ChoicesContainer'>
+				<div className={`Question__Choices ${answerIsWrong ? 'wrong' : ''}`}>
+					{choiceButtons}
+					{answerIsWrong ? <FontAwesomeIcon className='icon' icon={'times-circle'} /> : ''}
+				</div>
+			</div>
 		</div>
 	);
 }

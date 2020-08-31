@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 
+// Utility
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 // App states
 const INTRO = 0;
+const LIST = 1;
 
 /**
  *	Results screen
@@ -19,10 +23,35 @@ export default function Results({ data, functions }) {
 	}
 
 	return (
-		<>
-			<button onClick={() => changeState(INTRO)}>quit</button>
-			<p>You {win ? 'WIN' : 'LOSE'}</p>
-			<p>{!!startTime && `You completed the quiz in: ${seconds} seconds!`}</p>
-		</>
+		<section className='Results'>
+			<header className='Results__Topbar'>
+				<div>
+					<div>
+						<button className='CloseButton' onClick={() => changeState(INTRO)}>
+							<FontAwesomeIcon icon={'times'} />
+						</button>
+					</div>
+					<div>
+						<h1>Results</h1>
+					</div>
+					<div></div>
+				</div>
+			</header>
+			<main className='Results__Main'>
+				<div className='Results__Content'>
+					<h2>Quiz complete!</h2>
+					<p>
+						<button onClick={() => changeState(LIST)}>Back to categories</button>
+					</p>
+					<p>{!!startTime && `You completed the quiz in: ${seconds} seconds!`}</p>
+				</div>
+
+				<div className='Results__Related'>
+					<h3>Play next:</h3>
+					<p>Related quizzes</p>
+				</div>
+			</main>
+
+		</section>
 	);
 }

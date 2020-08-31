@@ -11,6 +11,8 @@ import Question from './Question';
 const TIMELIMIT = 30;
 const LIST = 1;
 
+const USETIMER = false;
+
 /**
  *
  */
@@ -23,7 +25,7 @@ export default function Questions({ data, functions }) {
 
 	// Counter
 	const [count, setCount] = useState(TIMELIMIT);
-	const counter = () => setCount(count - 1);
+	const counter = USETIMER ? () => setCount(count - 1) : null;
 
 	// Init interval on mount, destroy on unmount
 	useEffect(() => {
@@ -65,11 +67,11 @@ export default function Questions({ data, functions }) {
 				<div>
 					<div>
 						<button className='CloseButton' onClick={() => changeState(LIST)}>
-							<FontAwesomeIcon icon={'times'} />
+							<FontAwesomeIcon icon={'chevron-left'} />
 						</button>
 					</div>
 					<div>
-						<p>{count}</p>
+						{USETIMER && <p>{count}</p>}
 					</div>
 					<div></div>
 				</div>

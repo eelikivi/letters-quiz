@@ -1,0 +1,16 @@
+.Results {
+	&__Topbar {
+		@extend .Topbar;
+	}
+
+	&__Main {
+		@extend .Container;
+		@extend .Main;
+
+		padding: 1rem;
+	}
+
+	&__Content {
+		margin-bottom: 2rem;
+	}
+}

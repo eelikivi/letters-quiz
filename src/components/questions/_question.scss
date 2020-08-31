@@ -63,9 +63,17 @@
 		}
 	}
 
+	&__ChoicesContainer {
+		display: flex;
+		justify-content: center;
+	}
+
 	&__Choices {
+		position: relative;
 		margin-top: 2.5rem;
-		padding-bottom: 2rem;
+		margin-bottom: 2rem;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
 
 		button {
 			background-color: $secondary;
@@ -75,6 +83,18 @@
 				background-color: $white;
 				border: 1px solid $secondary;
 			}
+		}
+
+		&.wrong button {
+			background-color: $danger;
+		}
+
+		.icon {
+			position: absolute;
+			left: calc(100% + 0.5rem);
+			top: 50%;
+			transform: translateY(-50%);
+			color: $danger;
 		}
 	}
 

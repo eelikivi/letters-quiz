@@ -34,10 +34,10 @@ initFontAwesome();
  * App
  */
 export default function App() {
-	const [appState, setAppState] = useState(LIST);
+	const [appState, setAppState] = useState(RESULTS);
 	const [quiz, setQuiz] = useState(false);
 
-	const [resultsData, setResultsData] = useState(null);
+	const [resultsData, setResultsData] = useState({});
 
 
 	/**
